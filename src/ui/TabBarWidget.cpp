@@ -166,14 +166,18 @@ void TabBarWidget::mouseMoveEvent(QMouseEvent *event)
 {
 	QTabBar::mouseMoveEvent(event);
 
-	if (m_previewWidget && !m_previewWidget->isVisible() && m_previewTimer == 0)
+	// Do not update the preview widget if a tab is being dragged
+	if ((QApplication::mouseButtons() & Qt::LeftButton) == 0)
 	{
-		m_previewWidget->show();
-	}
+		if (m_previewWidget && !m_previewWidget->isVisible() && m_previewTimer == 0)
+		{
+			m_previewWidget->show();
+		}
 
-	if (m_previewWidget && m_previewWidget->isVisible())
-	{
-		showPreview(tabAt(event->pos()));
+		if (m_previewWidget && m_previewWidget->isVisible())
+		{
+			showPreview(tabAt(event->pos()));
+		}
 	}
 }
 
