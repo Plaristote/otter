@@ -151,6 +151,13 @@ QtWebKitWebWidget::QtWebKitWebWidget(bool privateWindow, ContentsWidget *parent,
 	connect(m_splitter, SIGNAL(splitterMoved(int,int)), this, SIGNAL(progressBarGeometryChanged()));
 }
 
+void QtWebKitWebWidget::showEvent(QShowEvent*)
+{
+  // Reset the thumbnail whenever the tab is focused
+  if (!(m_thumbnail.isNull()))
+    m_thumbnail = QPixmap();
+}
+
 void QtWebKitWebWidget::search(QAction *action)
 {
 	const QString engine = ((!action || action->data().type() != QVariant::String) ? m_searchEngine : action->data().toString());

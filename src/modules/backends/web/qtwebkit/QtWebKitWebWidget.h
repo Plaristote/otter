@@ -41,6 +41,7 @@ class QtWebKitWebWidget : public WebWidget
 public:
 	explicit QtWebKitWebWidget(bool privateWindow = false, ContentsWidget *parent = NULL, QtWebKitWebPage *page = NULL);
 
+	void showEvent(QShowEvent*);
 	void search(const QString &query, const QString &engine);
 	void print(QPrinter *printer);
 	void setQuickSearchEngine(const QString &searchEngine);
